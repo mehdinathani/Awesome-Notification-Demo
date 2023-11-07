@@ -1,6 +1,10 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesomenotificationsdemo/main.dart';
+import 'package:awesomenotificationsdemo/screens/awesomenotifications_view.dart';
+import 'package:awesomenotificationsdemo/screens/home_view.dart';
+import 'package:awesomenotificationsdemo/screens/image_notification_imageView.dart';
 import 'package:awesomenotificationsdemo/screens/notification_view.dart';
+import 'package:awesomenotificationsdemo/screens/update_view.dart';
 import 'package:flutter/material.dart';
 
 class NotificationService {
@@ -71,11 +75,17 @@ class NotificationService {
     debugPrint('onActionReceivedMethod');
     final payload = receivedAction.payload ?? {};
     if (payload["navigate"] == "true") {
-      MyApp.navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          builder: (_) => const NotificationView(),
-        ),
-      );
+      if (payload.containsKey('navigatekey')) {
+        final routeName = payload['navigatekey'];
+
+        // Get the crossponding Material page route from route Mapping
+        final route = routeMappings[routeName];
+        if (route != null) {
+          MyApp.navigatorKey.currentState?.push(
+            route,
+          );
+        }
+      }
     }
   }
 
@@ -91,6 +101,7 @@ class NotificationService {
     final List<NotificationActionButton>? actionButtons,
     final bool scheduled = false,
     final int? interval,
+    final String? navigationKey,
   }) async {
     assert(!scheduled || (scheduled && interval != null));
 
@@ -119,3 +130,12 @@ class NotificationService {
     );
   }
 }
+
+Map<String, MaterialPageRoute> routeMappings = {
+  '/home': MaterialPageRoute(builder: (context) => const HomeView()),
+  '/screenone':
+      MaterialPageRoute(builder: (context) => const AwesomeNotificationView()),
+  '/update': MaterialPageRoute(builder: (context) => const UpdateView()),
+  '/bigImage': MaterialPageRoute(builder: (context) => const BigImageView()),
+  // Add more routes as needed
+};

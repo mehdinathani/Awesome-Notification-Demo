@@ -102,6 +102,7 @@ class HomeView extends StatelessWidget {
                         body: "Click to download Latest version",
                         payload: {
                           'navigate': "true",
+                          'navigatekey': "/screenone"
                         },
                         actionButtons: [
                           NotificationActionButton(
@@ -125,7 +126,12 @@ class HomeView extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Text("Send Message after "),
+                        const Text(
+                          "Send Message after ",
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
                         Flexible(
                           child: TextField(
                             controller: _secondscountController,
@@ -144,7 +150,12 @@ class HomeView extends StatelessWidget {
                             keyboardType: TextInputType.number,
                           ),
                         ),
-                        Text(" Seconds."),
+                        const Text(
+                          " Seconds.",
+                          style: TextStyle(
+                            fontSize: 22,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -153,18 +164,19 @@ class HomeView extends StatelessWidget {
                     Container(
                       width: buttonmediaHeight,
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           try {
                             int seconds =
                                 int.parse(_secondscountController.text);
                             // Use 'seconds' in your notification scheduling logic.
-                            NotificationService.showNotification(
+                            await NotificationService.showNotification(
                               title: "Message Sent",
                               body:
                                   "Your message has been sent after $seconds seconds",
                               scheduled: true,
                               interval: seconds,
                             );
+                            _secondscountController.clear();
                           } catch (e) {
                             // Handle the case where the input is not a valid number, e.g., show an error to the user.
                             print(
