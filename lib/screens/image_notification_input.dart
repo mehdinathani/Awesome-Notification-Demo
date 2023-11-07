@@ -1,8 +1,8 @@
 import 'package:awesomenotificationsdemo/components/custom_button.dart';
+import 'package:awesomenotificationsdemo/config.dart';
 import 'package:awesomenotificationsdemo/functions/notification_functions.dart';
-import 'package:awesomenotificationsdemo/functions/search_image.dart';
-import 'package:awesomenotificationsdemo/functions/searchimage_bard.dart';
-import 'package:awesomenotificationsdemo/functions/searchimages_stackoverflow.dart';
+import 'package:awesomenotificationsdemo/functions/ussplashimage.dart';
+import 'package:awesomenotificationsdemo/global.dart';
 import 'package:flutter/material.dart';
 
 class BigImageNotification extends StatelessWidget {
@@ -66,29 +66,26 @@ class BigImageNotification extends StatelessWidget {
             ),
             CustomButtonForNotification(
               onPressed: () async {
-                // // List imagelist = await getImageByDom(_searchedImageName.text);
-                // // debugPrint(
-                // //   imagelist.toString(),
-                // // );
+                final apiKey = apiKeys.unsplashapiaccesskey;
+                final results =
+                    await searchUnsplashPhotos(_searchedImageName.text, apiKey);
 
-                // String firtimage =
-                //     await getFirstImageUrl(_searchedImageName.text);
-                // debugPrint("result $firtimage");
+                // Extract image URLs from the API response
+                final imageUrls =
+                    results.map((photo) => photo['urls']['regular']).toList();
+
+                debugPrint(imageUrls[0]);
+                searchItem = _searchedImageName.text;
+                searchItemURL = imageUrls[0];
+
                 try {
-                  //   String query =
-                  //       _searchedImageName.text; // Replace with the user's query
-
-                  //   String htmlContent =
-                  //       await fetchGoogleImageSearchResults(query);
-                  //   String imageUrl = extractFirstImageUrl(htmlContent);
-
                   await showBigPictureNotificationWithNavigation(
                       _searchedImageName.text,
                       "Your searched image found.",
                       "You have searched ${_searchedImageName.text}, showing first result,click in the notification to view",
-                      "bigPictureLink",
+                      imageUrls[0],
                       "Image",
-                      "imageUrl",
+                      _searchedImageName.text,
                       Colors.black,
                       "/bigImage");
                 } catch (e) {

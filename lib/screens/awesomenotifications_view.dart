@@ -13,7 +13,7 @@ class AwesomeNotificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Awesome Notifications."),
+        title: const Center(child: Text("Awesome Notifications.")),
       ),
       body: Center(
         child: SingleChildScrollView(
