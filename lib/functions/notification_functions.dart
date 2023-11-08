@@ -106,8 +106,8 @@ showBigPictureNotificationWithNavigation(
 
 showScheduleNotification(String title, String body, int secondsDuration) async {
   await NotificationService.showNotification(
-    title: "Scheduled Notification",
-    body: "Notification was fired after 5 seconds",
+    title: title,
+    body: body,
     scheduled: true,
     interval: secondsDuration,
   );
