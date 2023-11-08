@@ -9,10 +9,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double mediaWidth = MediaQuery.of(context).size.width;
+    // double mediaWidth = MediaQuery.of(context).size.width;
     double mediaHeight = MediaQuery.of(context).size.height;
     double buttonmediaHeight = mediaHeight * 0.16;
-    TextEditingController _secondscountController = TextEditingController();
+    // TextEditingController _secondscountController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(

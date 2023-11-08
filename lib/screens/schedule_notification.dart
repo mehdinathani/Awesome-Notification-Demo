@@ -7,7 +7,7 @@ class ScheduleMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double mediaWidth = MediaQuery.of(context).size.width;
+    // double mediaWidth = MediaQuery.of(context).size.width;
     double mediaHeight = MediaQuery.of(context).size.height;
     double buttonmediaHeight = mediaHeight * 0.50;
     TextEditingController _secondscountController = TextEditingController();

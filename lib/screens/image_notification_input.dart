@@ -10,9 +10,9 @@ class BigImageNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double mediaWidth = MediaQuery.of(context).size.width;
+    // double mediaWidth = MediaQuery.of(context).size.width;
     double mediaHeight = MediaQuery.of(context).size.height;
-    double buttonmediaHeight = mediaHeight * 0.50;
+    // double buttonmediaHeight = mediaHeight * 0.50;
     TextEditingController _searchedImageName = TextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -90,7 +90,7 @@ class BigImageNotification extends StatelessWidget {
                       "/bigImage");
                 } catch (e) {
                   // Handle the case where the input is not a valid number, e.g., show an error to the user.
-                  print("Invalid input: ${_searchedImageName.text}");
+                  debugPrint("Invalid input: ${_searchedImageName.text}");
                   // You can also display an error message to the user using a SnackBar or AlertDialog.
                 }
               },
